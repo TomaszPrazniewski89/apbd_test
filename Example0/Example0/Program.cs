@@ -49,7 +49,7 @@ namespace Example0
                 var content =await  response.Content.ReadAsStringAsync();
                 //Console.WriteLine(content);
                 //create better Regex
-                Regex telRegex = new Regex(" [a-z]+@[a-z.]+");
+                Regex telRegex = new Regex(" [a-z0-9!#$]+@[a-z.]+");
                 var matches = telRegex.Matches(content);
 
                 foreach( var i in matches)
@@ -68,7 +68,7 @@ namespace Example0
             }
 
             //good practice
-            //ale jak bedzie usadowiona na koncu kodu to jest mozlwioe, ze nigdy sie nie wykona
+            //ale jak bedzie usadowiona na koncu kodu to jest mozliwe, ze nigdy sie nie wykona
             // najlepiej uzyc try catch finally albo w c# za pomoca instrukcji using (linia 42 using var httpClient = new HttpClient();) wtedy dispose sie wykona na tym obiekcie
             // dispose uzywa sie aby zwolnic zasoby w sposob bezpieczny
             httpClient.Dispose();
