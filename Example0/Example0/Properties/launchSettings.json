@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Example0": {
+      "commandName": "Project",
+      "commandLineArgs": "https://olx.pl"
+    }
+  }
+}
