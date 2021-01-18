@@ -30,6 +30,7 @@ namespace Example0
             // UriKind.Absolute( what kind or uri)
             // out Uri uriResult (out parameter) allow us later on to to work with parsed uri using variable uriREsult
             //   REturned type                                  Out parameter
+            //Uri result(34 linia) zwraca nam zmienna z parsowanym adres uri (ala deklaracja zmiennej) z ktorej kozystamy w lini 35
             bool result = Uri.TryCreate(args[0], UriKind.Absolute, out Uri uriResult)
                 && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
@@ -41,26 +42,36 @@ namespace Example0
             var httpClient = new HttpClient();
             var response = await httpClient.GetAsync(uriResult);
 
+
             if (response.IsSuccessStatusCode)
+                //response.StatusCode == HttpStatusCode.OK
             {
                 var content =await  response.Content.ReadAsStringAsync();
                 //Console.WriteLine(content);
                 //create better Regex
-                Regex telRegex = new Regex("[a-z]+@[a-z.]+");
+                Regex telRegex = new Regex(" [a-z]+@[a-z.]+");
                 var matches = telRegex.Matches(content);
 
                 foreach( var i in matches)
                 {
                     Console.WriteLine(i);
                 }
+                //jesli sa duplikaty emaili wyswietlamy w spsoob unikalny
                 //Make sure that we print emails in unique way
                 //HashSet<String) <--collects only unique values
+
                        
             }
             else
             {
                 Console.WriteLine("Error during the request");
             }
+
+            //good practice
+            //ale jak bedzie usadowiona na koncu kodu to jest mozlwioe, ze nigdy sie nie wykona
+            // najlepiej uzyc try catch finally albo w c# za pomoca instrukcji using (linia 42 using var httpClient = new HttpClient();) wtedy dispose sie wykona na tym obiekcie
+            // dispose uzywa sie aby zwolnic zasoby w sposob bezpieczny
+            httpClient.Dispose();
 
         }
     }
