@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace Example0
     {   //We usually use args parameter to pass the data to the main method
         static async Task Main(string[] args)
         {
+
+            HashSet<string> hashSet = new HashSet<string>();
             //HttpClient httpClient = new HttpClient();
             //HttpResponseMessage result = await httpClient.GetAsync("https://www.olx.pl/nieruchomosci/lipno");
 
@@ -50,11 +53,16 @@ namespace Example0
                 //Console.WriteLine(content);
                 //create better Regex
                 Regex telRegex = new Regex(" [a-z0-9!#$]+@[a-z.]+");
+
+                //zapisuje jako tablica
                 var matches = telRegex.Matches(content);
+
 
                 foreach( var i in matches)
                 {
+                    hashSet.Add(i.ToString());
                     Console.WriteLine(i);
+                    
                 }
                 //jesli sa duplikaty emaili wyswietlamy w spsoob unikalny
                 //Make sure that we print emails in unique way
@@ -71,6 +79,16 @@ namespace Example0
             //ale jak bedzie usadowiona na koncu kodu to jest mozliwe, ze nigdy sie nie wykona
             // najlepiej uzyc try catch finally albo w c# za pomoca instrukcji using (linia 42 using var httpClient = new HttpClient();) wtedy dispose sie wykona na tym obiekcie
             // dispose uzywa sie aby zwolnic zasoby w sposob bezpieczny
+            //Console.WriteLine(hashSet.Count);
+
+
+
+            //*Display all values in hashSet
+
+            foreach (var val in hashSet)
+            {
+                Console.WriteLine(val);
+            }
             httpClient.Dispose();
 
         }

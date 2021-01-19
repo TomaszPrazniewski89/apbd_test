@@ -2,7 +2,7 @@
   "profiles": {
     "Example0": {
       "commandName": "Project",
-      "commandLineArgs": "https://olx.pl"
+      "commandLineArgs": "https://www.pja.edu.pl/"
     }
   }
 }
